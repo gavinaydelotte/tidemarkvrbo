@@ -1,6 +1,5 @@
 /* Layout and structural rules */
-.site-header{background:#fff;border-bottom:1px solid rgba(14,61,77,0.06);position:sticky;top:0;z-index:50;transition:box-shadow 200ms ease}
-.site-header.scrolled{box-shadow:0 6px 20px rgba(13,38,47,0.08)}
+.site-header{background:#fff;border-bottom:1px solid transparent;position:fixed;top:0;left:0;right:0;z-index:50;box-shadow:0 2px 14px rgba(13,38,47,0.10)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 0}
 .brand{font-weight:700;color:var(--accent);text-decoration:none}
 .nav{list-style:none;margin:0;padding:0;display:flex;gap:1rem}
