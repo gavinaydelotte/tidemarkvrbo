@@ -67,12 +67,16 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Aria
   .nav{gap:1rem}
   .nav a{font-size:0.78rem}
 }
-@media(max-width:480px){
-  .header-inner{height:60px;padding:0 0.75rem;column-gap:0.75rem}
+@media(max-width:540px){
+  .header-inner{
+    display:flex;flex-direction:column;align-items:center;
+    height:auto;padding:0.5rem 1rem 0.6rem;gap:0.35rem;column-gap:0;
+  }
+  .header-inner .brand{justify-self:unset}
+  .header-inner .nav-left,.header-inner .nav-right{justify-self:unset;min-width:0;overflow:visible}
   .logo{height:38px}
-  .nav{gap:0.5rem}
-  .nav-left,.nav-right{min-width:0;overflow:hidden}
-  .nav a{font-size:0.72rem;letter-spacing:0.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav{gap:0.35rem 0.7rem;flex-wrap:wrap;justify-content:center}
+  .nav a{font-size:0.75rem;letter-spacing:0.03em;white-space:nowrap}
 }
 .hero{padding:2rem 1rem;text-align:left}
 .lead{color:var(--muted);margin-top:0.25rem}
@@ -157,12 +161,20 @@ html{scroll-behavior:smooth}
 }
 .parallax-banner{
   position:relative;
-  background-image:url('images/beach.webp');
-  background-size:cover;
-  background-position:center 50%;
+  overflow:hidden;
   min-height:440px;
   width:100%;
-  will-change:background-position;
+}
+.parallax-bg{
+  position:absolute;
+  top:-15%;
+  left:0;
+  width:100%;
+  height:130%;
+  object-fit:cover;
+  will-change:transform;
+  pointer-events:none;
+  user-select:none;
 }
 .parallax-logo{
   position:absolute;

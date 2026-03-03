@@ -37,6 +37,7 @@
 
   <main>
     <div class="parallax-banner">
+      <img src="images/beach.webp" alt="" class="parallax-bg" aria-hidden="true">
       <img src="images/logowhite.png" alt="Tidemark Vacation Rentals" class="parallax-logo">
     </div>
 
@@ -77,18 +78,17 @@
       document.querySelector('.site-header').classList.toggle('scrolled',window.scrollY>140);
     },{passive:true});
 
-    // Parallax: skip on touch devices (iOS Safari repaints background-position off the GPU,
-    // causing jank during momentum scrolling)
+    // Parallax: uses transform (GPU-accelerated) so it works on mobile too
     (function(){
-      if(window.matchMedia('(hover:none) and (pointer:coarse)').matches) return;
       var banner = document.querySelector('.parallax-banner');
       if(!banner) return;
+      var bg = banner.querySelector('.parallax-bg');
       var logo = banner.querySelector('.parallax-logo');
       function tick(){
         var rect = banner.getBoundingClientRect();
         var centerOffset = rect.top + rect.height / 2 - window.innerHeight / 2;
         var shift = (centerOffset * -0.3).toFixed(1);
-        banner.style.backgroundPositionY = 'calc(50% + ' + shift + 'px)';
+        if(bg) bg.style.transform = 'translateY(' + shift + 'px)';
         if(logo) logo.style.transform = 'translate(-50%, calc(-50% + ' + shift + 'px))';
       }
       window.addEventListener('scroll', tick, {passive:true});
