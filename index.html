@@ -47,10 +47,55 @@
       <a href="listings.html" class="btn-primary">Browse Listings</a>
     </section>
 
-    <section class="home-teaser container">
-      <h2>Looking for a Longer Stay?</h2>
-      <p class="lead">If you're considering making the Treasure Coast your permanent home, Tidemark Property Group has an expertly curated selection of homes for sale in Stuart and the surrounding area.</p>
-      <a href="https://tidemarkpropertygroup.com/homes-for-sale/" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width:100%;box-sizing:border-box">View Homes for Sale</a>
+    <div class="home-listings-scroll-wrap">
+      <div class="home-listings-scroll">
+        <a class="home-listing-card" href="properties/fishing-music-paradise.html">
+          <figure><img src="images/fishingmusicparadise.avif" alt="Fishing and Music Paradise" loading="lazy"></figure>
+          <div class="home-listing-card-meta">
+            <strong>Fishing and Music Paradise</strong>
+            <span>Ft. Pierce, FL</span>
+          </div>
+        </a>
+        <a class="home-listing-card" href="properties/herons-nest-jensen-beach.html">
+          <figure><img src="https://tidemarkpropertygroup.com/wp-content/uploads/b322d1e5-e257-435a-ab02-1140fc0cd471.jpeg.avif" alt="Heron's Nest" loading="lazy"></figure>
+          <div class="home-listing-card-meta">
+            <strong>Heron's Nest</strong>
+            <span>Jensen Beach, FL</span>
+          </div>
+        </a>
+        <a class="home-listing-card" href="properties/herons-hideaway-jensen-beach.html">
+          <figure><img src="https://tidemarkpropertygroup.com/wp-content/uploads/bb3c4fcd-e1f4-421b-a0d3-3cce613274f4.jpeg.avif" alt="Heron's Hideaway" loading="lazy"></figure>
+          <div class="home-listing-card-meta">
+            <strong>Heron's Hideaway</strong>
+            <span>Jensen Beach, FL</span>
+          </div>
+        </a>
+        <a class="home-listing-card" href="properties/coastal-cottage-jensen-beach.html">
+          <figure><img src="https://tidemarkpropertygroup.com/wp-content/uploads/6f363882-ede4-4c04-97e1-b009e5337b51.jpeg.avif" alt="Coastal Cottage" loading="lazy"></figure>
+          <div class="home-listing-card-meta">
+            <strong>Coastal Cottage</strong>
+            <span>Jensen Beach, FL</span>
+          </div>
+        </a>
+        <a class="home-listing-card" href="properties/tropical-gem-stuart.html">
+          <figure><img src="https://tidemarkpropertygroup.com/wp-content/uploads/7586237f-5f3f-47c0-bffa-d0a7342712a3.jpeg.webp" alt="Tropical Gem" loading="lazy"></figure>
+          <div class="home-listing-card-meta">
+            <strong>Tropical Gem</strong>
+            <span>Stuart, FL</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <section class="home-teaser">
+      <div class="home-teaser-img-wrap">
+        <img src="https://st4.depositphotos.com/1009701/39217/i/450/depositphotos_392174784-stock-photo-beautiful-florida-house-beach-rent.jpg" alt="Beautiful Florida beach house for rent" class="home-teaser-parallax-img">
+      </div>
+      <div class="home-teaser-text container">
+        <h2>Looking for a Longer Stay?</h2>
+        <p class="lead">If you're considering making the Treasure Coast your permanent home, Tidemark Property Group has an expertly curated selection of homes for sale in Stuart and the surrounding area.</p>
+        <a href="https://tidemarkpropertygroup.com/homes-for-sale/" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width:100%;box-sizing:border-box">View Homes for Sale</a>
+      </div>
     </section>
   </main>
 
@@ -139,6 +184,21 @@
         var shift = (centerOffset * -0.3).toFixed(1);
         if(bg) bg.style.transform = 'translateY(' + shift + 'px)';
         if(logo) logo.style.transform = 'translate(-50%, calc(-50% + ' + shift + 'px))';
+      }
+      window.addEventListener('scroll', tick, {passive:true});
+      tick();
+    })();
+
+    // Parallax for home-teaser image
+    (function(){
+      var wrap = document.querySelector('.home-teaser-img-wrap');
+      if(!wrap) return;
+      var img = wrap.querySelector('.home-teaser-parallax-img');
+      function tick(){
+        var rect = wrap.getBoundingClientRect();
+        var centerOffset = rect.top + rect.height / 2 - window.innerHeight / 2;
+        var shift = (centerOffset * -0.16).toFixed(1);
+        if(img) img.style.transform = 'translateY(' + shift + 'px)';
       }
       window.addEventListener('scroll', tick, {passive:true});
       tick();

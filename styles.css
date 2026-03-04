@@ -232,10 +232,62 @@ html{scroll-behavior:smooth}
   from{opacity:0}
   to{opacity:1}
 }
+.home-listings-scroll-wrap{background:#fff;padding:1.5rem 0 2rem}
+.home-listings-scroll{
+  display:flex;gap:1rem;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:0.25rem 1.5rem 0.75rem;
+  scrollbar-width:thin;scrollbar-color:var(--accent) #e6eef2;
+}
+.home-listings-scroll::-webkit-scrollbar{height:6px}
+.home-listings-scroll::-webkit-scrollbar-track{background:#e6eef2;border-radius:3px}
+.home-listings-scroll::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+.home-listing-card{
+  flex:0 0 220px;scroll-snap-align:start;
+  display:flex;flex-direction:column;
+  text-decoration:none;color:inherit;
+  background:var(--card);border-radius:var(--radius);
+  overflow:hidden;box-shadow:0 4px 10px rgba(13,38,47,0.08);
+  transition:box-shadow 0.15s,transform 180ms cubic-bezier(.2,.8,.2,1);
+}
+.home-listing-card:hover{box-shadow:0 8px 24px rgba(13,38,47,0.14);transform:translateY(-3px)}
+.home-listing-card figure{margin:0;aspect-ratio:4/3;overflow:hidden}
+.home-listing-card figure img{width:100%;height:100%;object-fit:cover;display:block}
+.home-listing-card-meta{padding:0.6rem 0.75rem 0.8rem;display:flex;flex-direction:column;gap:0.15rem}
+.home-listing-card-meta strong{font-size:0.88rem;color:#102a43;line-height:1.3}
+.home-listing-card-meta span{font-size:0.78rem;color:var(--muted)}
 .home-teaser{
   background:#fff;
+  display:flex;
+  align-items:stretch;
+  overflow:hidden;
+}
+.home-teaser-img-wrap{
+  flex:0 0 45%;
+  position:relative;
+  overflow:hidden;
+  min-height:320px;
+}
+.home-teaser-parallax-img{
+  position:absolute;
+  top:-15%;
+  left:0;
+  width:100%;
+  height:130%;
+  object-fit:cover;
+  will-change:transform;
+  pointer-events:none;
+  user-select:none;
+}
+.home-teaser-text{
+  flex:1;
   padding-top:3rem;
   padding-bottom:3.5rem;
+}
+@media(max-width:760px){
+  .home-teaser{flex-direction:column}
+  .home-teaser-img-wrap{flex:none;height:220px}
+  .home-teaser-text{padding-top:2rem;padding-bottom:2.5rem}
 }
 .map-section{width:100%}
 .map-info{width:100%;background:var(--accent)}
