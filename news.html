@@ -42,9 +42,100 @@
     </section>
 
     <section class="container news-section">
-      <p class="muted">No posts yet — check back soon.</p>
+      <article class="news-card">
+        <figure class="news-card-figure">
+          <img src="https://tidemarkpropertygroup.com/wp-content/uploads/Kitchen-remodel-1-1.jpeg" alt="Well-stocked vacation rental kitchen" loading="lazy">
+        </figure>
+        <div class="news-card-body">
+          <p class="news-meta">Vacation Rental Tips &nbsp;·&nbsp; March 4, 2025</p>
+          <h2 class="news-title">How to Properly Stock Your Vacation Rental: A Guide to Happy Guests and Great Reviews</h2>
+          <p class="news-intro">Properly stocking your vacation rental can make the difference between a one-time stay and a five-star review. Modern travelers expect comfort, convenience, and thoughtful details that turn a rental into a welcoming home away from home.</p>
+
+          <h3>1. Essentials First: Cover the Basics</h3>
+          <h4>Kitchen</h4>
+          <ul>
+            <li>Dinnerware — plates, bowls, glasses, mugs, and utensils for max occupancy plus extras</li>
+            <li>Cookware — pots, pans, baking sheets, cutting boards, cooking utensils</li>
+            <li>Tools — can opener, wine opener, scissors</li>
+            <li>Appliances — microwave, toaster, coffee maker with filters</li>
+            <li>Pantry staples — salt, pepper, and basic spices</li>
+            <li>Cleaning — dish soap, sponges, paper towels, trash bags</li>
+          </ul>
+          <h4>Bathroom</h4>
+          <ul>
+            <li>Towels — bath, hand, and washcloths, minimum two sets per guest</li>
+            <li>Toiletries — hand soap, toilet paper, tissues</li>
+            <li>Hair dryer, plunger, and toilet brush</li>
+          </ul>
+          <h4>Bedroom</h4>
+          <ul>
+            <li>Fresh linens, extra pillows, and blankets</li>
+            <li>Hangers, drawer access, and an alarm clock or charging station</li>
+          </ul>
+          <h4>Cleaning Supplies</h4>
+          <ul>
+            <li>Broom, dustpan, mop, and vacuum (essential for pet-friendly units)</li>
+            <li>All-purpose cleaner and disinfectant wipes</li>
+          </ul>
+
+          <h3>2. Go Beyond the Basics: Add Comfort and Convenience</h3>
+          <h4>Comfort Upgrades</h4>
+          <ul>
+            <li>Blackout curtains or eye masks</li>
+            <li>Fans or space heaters</li>
+            <li>Quality mattresses with varied firmness options</li>
+            <li>Welcome mats and shoe racks</li>
+          </ul>
+          <h4>Tech &amp; Entertainment</h4>
+          <ul>
+            <li>Reliable Wi-Fi with clear access instructions</li>
+            <li>Smart TV with streaming subscriptions (Netflix, Disney+)</li>
+            <li>Books, board games, playing cards, and a Bluetooth speaker</li>
+          </ul>
+
+          <h3>3. Local Touches Make a Big Impact</h3>
+          <p>Guests love a welcome binder that includes house rules, emergency contacts, restaurant recommendations, grocery store and pharmacy locations, nearby attractions, public transit details, parking guidance, and local maps. Consider adding locally-sourced snacks, coffee, or beverages to make the welcome feel truly personal.</p>
+
+          <h3>4. Stock for Stays of All Lengths</h3>
+          <p>Long-term guests need more than a weekend visitor. Make sure longer stays are covered with:</p>
+          <ul>
+            <li>Extended toiletries and extra toilet paper</li>
+            <li>Laundry essentials — detergent, fabric softener, stain treatment</li>
+            <li>Iron and ironing board</li>
+            <li>Reusable shopping bags and additional cookware and storage containers</li>
+          </ul>
+
+          <h3>5. Think Seasonally</h3>
+          <ul>
+            <li><strong>Summer:</strong> Sunscreen, beach towels, outdoor games, fans</li>
+            <li><strong>Winter:</strong> Throw blankets, hot chocolate, snow shovels, sleds</li>
+            <li><strong>Spring/Fall:</strong> Allergy-friendly items (air purifiers), umbrellas</li>
+          </ul>
+
+          <h3>6. Safety &amp; Accessibility</h3>
+          <ul>
+            <li>Smoke and carbon monoxide detectors</li>
+            <li>Fire extinguisher and first aid kit</li>
+            <li>Flashlights with batteries and hallway night lights</li>
+            <li>Clearly labeled light switches and remotes</li>
+            <li>Non-slip bathroom mats</li>
+          </ul>
+
+          <h3>Final Tip: Replenish and Refresh Regularly</h3>
+          <p>After each guest checkout, run a complete inventory review and restock supplies. Keep a checklist to make restocking faster, and actively ask guests for feedback on what they appreciated — or wished was there. Thoughtful stocking creates an experience, not just a space, encouraging repeat visits and word-of-mouth recommendations.</p>
+
+          <a class="btn-primary news-source-link" href="https://tidemarkpropertygroup.com/stocking-your-vacation-rental-for-success/" target="_blank" rel="noopener noreferrer">Read on TidemarkPropertyGroup.com</a>
+        </div>
+      </article>
     </section>
   </main>
+
+  <div class="wave-divider" aria-hidden="true">
+    <canvas id="wave-canvas"></canvas>
+  </div>
+  <div class="wave-footer-brand">
+    <img src="images/logowhite.png" alt="Tidemark Vacation Rentals">
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -56,6 +147,43 @@
     window.addEventListener('scroll',function(){
       document.querySelector('.site-header').classList.toggle('scrolled',window.scrollY>140);
     },{passive:true});
+
+    // Animated wave divider
+    (function(){
+      var canvas = document.getElementById('wave-canvas');
+      if(!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var w, h, raf, t = 0;
+      function resize(){
+        w = canvas.width = canvas.offsetWidth * (window.devicePixelRatio || 1);
+        h = canvas.height = canvas.offsetHeight * (window.devicePixelRatio || 1);
+        ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+        w /= (window.devicePixelRatio || 1);
+        h /= (window.devicePixelRatio || 1);
+      }
+      function drawWave(yCenter, amp, freq, phase, color){
+        ctx.beginPath();
+        ctx.moveTo(0, h);
+        for(var x = 0; x <= w; x += 2){
+          ctx.lineTo(x, yCenter + Math.sin(x / w * freq * Math.PI * 2 + phase) * amp);
+        }
+        ctx.lineTo(w, h);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+      }
+      function frame(){
+        ctx.clearRect(0, 0, w, h);
+        drawWave(h * 0.38, 11, 2.2, t * 0.55,       'rgba(0,122,144,0.22)');
+        drawWave(h * 0.56, 9,  2.8, t * 0.85 + 1.1, 'rgba(0,122,144,0.48)');
+        drawWave(h * 0.74, 7,  3.4, t * 1.15 + 2.3, '#007a90');
+        t += 0.0137;
+        raf = requestAnimationFrame(frame);
+      }
+      resize();
+      window.addEventListener('resize', function(){ cancelAnimationFrame(raf); resize(); frame(); }, {passive:true});
+      frame();
+    })();
   </script>
 </body>
 </html>

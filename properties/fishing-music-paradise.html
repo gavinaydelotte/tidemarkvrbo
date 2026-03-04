@@ -511,6 +511,10 @@
     </iframe>
   </section>
 
+  <div class="wave-divider" aria-hidden="true">
+    <canvas id="wave-canvas"></canvas>
+  </div>
+
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>© TideMark Property Group — Stuart, FL</p>
@@ -550,6 +554,43 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLightbox();
     });
+
+    // Animated wave divider
+    (function(){
+      var canvas = document.getElementById('wave-canvas');
+      if(!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var w, h, raf, t = 0;
+      function resize(){
+        w = canvas.width = canvas.offsetWidth * (window.devicePixelRatio || 1);
+        h = canvas.height = canvas.offsetHeight * (window.devicePixelRatio || 1);
+        ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+        w /= (window.devicePixelRatio || 1);
+        h /= (window.devicePixelRatio || 1);
+      }
+      function drawWave(yCenter, amp, freq, phase, color){
+        ctx.beginPath();
+        ctx.moveTo(0, h);
+        for(var x = 0; x <= w; x += 2){
+          ctx.lineTo(x, yCenter + Math.sin(x / w * freq * Math.PI * 2 + phase) * amp);
+        }
+        ctx.lineTo(w, h);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+      }
+      function frame(){
+        ctx.clearRect(0, 0, w, h);
+        drawWave(h * 0.38, 11, 2.2, t * 0.55,       'rgba(0,122,144,0.22)');
+        drawWave(h * 0.56, 9,  2.8, t * 0.85 + 1.1, 'rgba(0,122,144,0.48)');
+        drawWave(h * 0.74, 7,  3.4, t * 1.15 + 2.3, '#007a90');
+        t += 0.0137;
+        raf = requestAnimationFrame(frame);
+      }
+      resize();
+      window.addEventListener('resize', function(){ cancelAnimationFrame(raf); resize(); frame(); }, {passive:true});
+      frame();
+    })();
   </script>
 </body>
 </html>
